@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
+  <title>Stencil Component Starter</title>
+
+  <script type="module" src="/build/dlc-markdown-editor.esm.js"></script>
+  <script nomodule src="/build/dlc-markdown-editor.js"></script>
+
+  <style>
+    .markdown-editor-wrapper {
+      height: 50vh;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <!--<my-component first="Stencil" last="'Don't call me a framework' JS"></my-component>-->
+  <div class="markdown-editor-wrapper">
+    <dlc-markdown-editor enableShortcuts="true"></dlc-markdown-editor>
+  </div>
+
+  <script>
+
+    let dlcMdEditor = document.querySelector('dlc-markdown-editor');
+    dlcMdEditor.content = `# Simple JS Markdown Editor
+
+**Hello!** this is a *simple* \`js\` markdown editor!
+
+You can use the **buttons** at the top in order to edit your text :)
+
+## Shortcuts
+
+Currently only these shortcuts are supported:
+* \`Ctrl + B\`: make the selected text **bold**
+* \`Ctrl + I\`: make the selected text *italics*
+* \`Ctrl + K\`: insert a [link](https://codepen.io/dellos7/pen/zQywdP) onto the selected text
+
+## Buttons coming \`soon\`
+
+* *~~Strikethrough~~*
+* *~~Insert link~~*
+* Insert image
+* Insert list
+* Insert horizontal rule
+* Inline code
+* Code blocks
+
+---
+
+By [David López Castellote](https://dlopezcastellote.dev/)
+`;
+
+  </script>
+
+</body>
+
+</html>

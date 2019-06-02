@@ -1,0 +1,21 @@
+.wrapper {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.editor {
+    height: 100%;
+    width: 45%;
+    margin: 1rem;
+}
+
+.previewer {
+    height: 100%;
+    width: 45%;
+    margin: 1rem;
+    display: inline-block;
+    overflow-y: scroll;
+    //Style
+    border: 1px solid black;
+}
