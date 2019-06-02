@@ -1,0 +1,9 @@
+.editor {
+  height: 100%;
+  width: 50vw;
+}
+
+.previewer {
+  height: 100%;
+  width: 50vw;
+}

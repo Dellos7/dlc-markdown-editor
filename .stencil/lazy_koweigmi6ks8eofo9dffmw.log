@@ -1,0 +1,44 @@
+import { createEvent as __stencil_createEvent } from "@stencil/core";
+import { getConnect as __stencil_getConnect } from "@stencil/core";
+import { getContext as __stencil_getContext } from "@stencil/core";
+import { getElement as __stencil_getElement } from "@stencil/core";
+import { Host as __stencil_Host } from "@stencil/core";
+import { h as __stencil_h } from "@stencil/core";
+import { registerInstance as __stencil_registerInstance } from "@stencil/core";
+import { h } from '@stencil/core';
+import marked from 'marked';
+import { EditorShortcutUtils } from './editor-utils/shortcuts/editor-shortcut-utils';
+import { DefaultStylerFactory } from './editor-utils/stylers/factory/default-styler-factory';
+export class DlcMarkdownEditor {
+    constructor(hostRef) {
+        __stencil_registerInstance(this, hostRef);
+    }
+    componentWillLoad() {
+    }
+    componentDidLoad() {
+        this.setEditorElement();
+        this.prepareEditor();
+        this.convertTextToMarkdownListener();
+    }
+    prepareEditor() {
+        let stylerFactoryInterface = new DefaultStylerFactory(this.editorEl);
+        let editorShortcutUtils = new EditorShortcutUtils(stylerFactoryInterface);
+        editorShortcutUtils.exposeShortcuts();
+    }
+    setEditorElement() {
+        this.editorEl = this.el.shadowRoot.querySelector('.editor');
+    }
+    convertTextToMarkdownListener() {
+        if (!this.editorEl) {
+            this.setEditorElement();
+        }
+        this.editorEl.oninput = _ => {
+            this.markdownText = marked(this.editorEl.value);
+        };
+    }
+    render() {
+        return (h("div", { class: "wrapper" }, h("textarea", { class: "editor", contenteditable: true, part: "editor" }), h("div", { class: "previewer", part: "previewer", innerHTML: this.markdownText })));
+    }
+    get el() { return __stencil_getElement(this); }
+    static get style() { return "STYLE_TEXT_PLACEHOLDER:dlc-markdown-editor"; }
+}

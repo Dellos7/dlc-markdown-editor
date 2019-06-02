@@ -1,0 +1,22 @@
+.wrapper {
+  height: 100%;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.editor {
+  height: 100%;
+  width: 45%;
+  margin: 1rem;
+}
+
+.previewer {
+  height: 100%;
+  width: 45%;
+  margin: 1rem;
+  display: inline-block;
+  overflow-y: scroll;
+  border: 1px solid black;
+}

@@ -1,0 +1,16 @@
+.wrapper {
+  height: 100%;
+}
+
+.editor {
+  height: 100%;
+  width: 49%;
+  margin: 1rem;
+}
+
+.previewer {
+  height: 100%;
+  width: 49%;
+  display: inline-block;
+  margin: 1rem;
+}

@@ -1,0 +1,99 @@
+import { createEvent as __stencil_createEvent } from "@stencil/core";
+import { getConnect as __stencil_getConnect } from "@stencil/core";
+import { getContext as __stencil_getContext } from "@stencil/core";
+import { getElement as __stencil_getElement } from "@stencil/core";
+import { Host as __stencil_Host } from "@stencil/core";
+import { h as __stencil_h } from "@stencil/core";
+import { registerInstance as __stencil_registerInstance } from "@stencil/core";
+import { h } from '@stencil/core';
+import marked from 'marked';
+import { EditorShortcutUtils } from './editor-utils/shortcuts/editor-shortcut-utils';
+import { DefaultStylerFactory } from './editor-utils/stylers/factory/default-styler-factory';
+import { BoldStyler } from './editor-utils/stylers/bold-styler';
+import { ItalicsStyler } from './editor-utils/stylers/italics-styler';
+import { LinkStyler } from './editor-utils/stylers/link-styler';
+import { Heading1Styler } from './editor-utils/stylers/heading1-styler';
+export class DlcMarkdownEditor {
+    constructor(hostRef) {
+        __stencil_registerInstance(this, hostRef);
+        this.enableShortcuts = true;
+        this.stylers = {
+            bold: new BoldStyler(),
+            italics: new ItalicsStyler(),
+            link: new LinkStyler(),
+            h1: new Heading1Styler()
+        };
+    }
+    async componentWillLoad() {
+        console.log('componentWillLoad');
+        await this.setEditorElement();
+    }
+    componentDidLoad() {
+        console.log('componentDidLoad');
+        this.prepareEditor();
+        this.convertTextToMarkdownListener();
+    }
+    componentWillUpdate() {
+        console.log('Component will update and re-render');
+    }
+    componentDidUpdate() {
+        console.log('Component will update and re-render');
+    }
+    async bold() {
+        this.stylerFactoryInterface.style(this.stylers.bold);
+    }
+    async italics() {
+        this.stylerFactoryInterface.style(this.stylers.italics);
+    }
+    async link() {
+        this.stylerFactoryInterface.style(this.stylers.link);
+    }
+    async h1() {
+        this.stylerFactoryInterface.style(this.stylers.h1);
+    }
+    async setContent(content) {
+        this.content = content;
+    }
+    prepareEditor() {
+        this.stylerFactoryInterface = new DefaultStylerFactory(this.editorEl);
+        if (this.enableShortcuts) {
+            let editorShortcutUtils = new EditorShortcutUtils(this.stylerFactoryInterface);
+            editorShortcutUtils.exposeShortcuts();
+        }
+    }
+    async setEditorElement() {
+        return new Promise((resolve, _) => {
+            setTimeout(() => {
+                this.editorEl = this.el.shadowRoot.querySelector('.editor');
+                console.log('setEditorElement');
+                console.log(this.editorEl);
+                resolve();
+            }, 1);
+        });
+    }
+    async convertTextToMarkdownListener() {
+        if (!this.editorEl) {
+            await this.setEditorElement();
+        }
+        console.log('set oninput');
+        this.editorEl.oninput = _ => {
+            this.updateMarkdownPreview();
+        };
+    }
+    updateMarkdownPreview() {
+        console.log('updateMarkdownPreview');
+        if (this.editorEl) {
+            console.log('editorEl exists');
+            console.log(this.editorEl);
+            console.log(this.editorEl.value);
+            this.markdownText = marked(this.editorEl.value);
+            this.content = this.editorEl.value;
+        }
+    }
+    render() {
+        this.updateMarkdownPreview();
+        return (h("div", { class: "wrapper" }, h("div", { class: "buttons" }, h("button", { class: "button button-bold", onClick: _ => this.bold() }, "Bold"), h("button", { class: "button button-italics", onClick: _ => this.italics() }, "Italics"), h("button", { class: "button button-link", onClick: _ => this.link() }, "Link"), h("button", { class: "button button-h1", onClick: _ => this.h1() }, "H1")), h("textarea", { class: "editor", contenteditable: true, part: "editor", value: this.content }), h("div", { class: "previewer", part: "previewer", innerHTML: this.markdownText })));
+    }
+    get el() { return __stencil_getElement(this); }
+    static get style() { return "STYLE_TEXT_PLACEHOLDER:dlc-markdown-editor"; }
+}

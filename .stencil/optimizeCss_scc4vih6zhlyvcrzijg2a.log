@@ -1,0 +1,14 @@
+.wrapper {
+  height: 100%;
+}
+
+.editor {
+  height: 100%;
+  width: 50%;
+}
+
+.previewer {
+  height: 100%;
+  width: 50%;
+  display: inline-block;
+}

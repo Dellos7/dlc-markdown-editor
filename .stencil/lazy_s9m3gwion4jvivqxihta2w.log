@@ -1,0 +1,21 @@
+import { createEvent as __stencil_createEvent } from "@stencil/core";
+import { getConnect as __stencil_getConnect } from "@stencil/core";
+import { getContext as __stencil_getContext } from "@stencil/core";
+import { getElement as __stencil_getElement } from "@stencil/core";
+import { Host as __stencil_Host } from "@stencil/core";
+import { h as __stencil_h } from "@stencil/core";
+import { registerInstance as __stencil_registerInstance } from "@stencil/core";
+import { h } from '@stencil/core';
+import { format } from '../../utils/utils';
+export class MyComponent {
+    constructor(hostRef) {
+        __stencil_registerInstance(this, hostRef);
+    }
+    getText() {
+        return format(this.first, this.middle, this.last);
+    }
+    render() {
+        return h("div", null, "Hello, World! I'm ", this.getText());
+    }
+    static get style() { return "STYLE_TEXT_PLACEHOLDER:my-component"; }
+}
