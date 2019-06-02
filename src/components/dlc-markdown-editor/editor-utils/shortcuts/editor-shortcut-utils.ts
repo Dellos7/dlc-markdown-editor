@@ -1,9 +1,9 @@
 import { LinkStyler } from './../stylers/link-styler';
 import { StrikethroughStyler } from './../stylers/strikethrough-styler';
 import { ItalicsStyler } from './../stylers/italics-styler';
-import { StylerFactoryInterface } from './../../../../../dist/types/components/dlc-markdown-editor/editor-utils/stylers/factory/styler-factory-interface.d';
 import { BoldStyler } from './../stylers/bold-styler';
 import { EditorShortcutUtilsInterface } from "./editor-shortcut-utils-interface";
+import { StylerFactoryInterface } from '../stylers/factory/styler-factory-interface';
 
 export class EditorShortcutUtils extends EditorShortcutUtilsInterface {
 
