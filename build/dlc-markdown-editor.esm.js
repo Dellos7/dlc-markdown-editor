@@ -1,0 +1,1 @@
+import{a as e,b as t}from"./p-a0429e21.js";e().then(e=>t([["p-ep6j48xj",[[1,"dlc-markdown-editor",{enableShortcuts:[4,"enableshortcuts"],content:[1537],markdownText:[32],bold:[64],italics:[64],link:[64],h1:[64],setContent:[64]}]]],["p-ez9gjqxe",[[1,"my-component",{first:[1],middle:[1],last:[1]}]]]],{resourcesUrl:e}));
