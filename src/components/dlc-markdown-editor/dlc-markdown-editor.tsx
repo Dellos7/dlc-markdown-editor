@@ -20,8 +20,9 @@ export class DlcMarkdownEditor {
     @State() private markdownText: string;
     @Prop({ attribute: 'enableShortcuts' }) enableShortcuts: boolean = true;
     @Prop({ reflect: true, mutable: true }) content: string;
+    @Prop({ reflect: true, mutable: true }) customElementSelector: string;
 
-    private editorEl: HTMLTextAreaElement;
+    private editorEl: HTMLTextAreaElement | HTMLInputElement; //ojo
     private stylerFactoryInterface: StylerFactoryInterface;
     private stylers = {
         bold: new BoldStyler(),
@@ -77,14 +78,56 @@ export class DlcMarkdownEditor {
         if( !this.editorEl ) {
             await this.setEditorElement();
         }
-        this.editorEl.oninput = _ => {
-            this.content = this.editorEl.value;
-            this.updateMarkdownPreview();
-        };
+        if( this.editorEl ) {
+            this.editorEl.oninput = _ => {
+                this.content = this.editorEl.value;
+                this.updateMarkdownPreview();
+            };
+        }
     }
 
     private updateMarkdownPreview() {
         this.markdownText = marked( this.content );
+    }
+
+    private getEditorElementHtml() {
+        return this.customElementSelector ? this._getEditorElementCustom() : this._getEditorElementDefault();
+    }
+
+    private _getEditorElementCustom() {
+        if( this.editorEl ) {
+            return this.editorEl.outerHTML;
+        }
+        let el = document.createElement(this.customElementSelector) as HTMLInputElement;
+        if( el ) {
+            //el.value = this.content;
+            //el.innerHTML = this.content;
+            setTimeout( () => {
+                this.editorEl.value = this.content; //Funciona pero no sé si es adecuado...
+            }, 100);
+            el.className = 'editor';
+            el.contentEditable = 'true';
+            return el.outerHTML;
+        }
+        return null;
+    }
+
+    private _getEditorElementDefault() {
+        if( this.editorEl ) {
+            return this.editorEl.outerHTML;
+        }
+        let el = document.createElement('textarea');
+        if( el ) {
+            //el.value = this.content;
+            //el.innerHTML = this.content;
+            setTimeout( () => {
+                this.editorEl.value = this.content; //Funciona pero no sé si es adecuado...
+            }, 100);
+            el.className = 'editor';
+            el.contentEditable = 'true';
+            return el.outerHTML;
+        }
+        return null;
     }
 
     render() {
@@ -97,7 +140,8 @@ export class DlcMarkdownEditor {
                     <button class="button button-link" onClick={_ => this.link()}>Link</button>
                     <button class="button button-h1" onClick={_ => this.h1()}>H1</button>
                 </div>
-                <textarea class="editor" contenteditable part="editor" value={this.content}></textarea>
+                {/*<textarea class="editor" contenteditable part="editor" value={this.content}></textarea>}*/}
+                <span class="editor-wrapper" innerHTML={ this.getEditorElementHtml() }></span>
                 <div class="previewer" part="previewer" innerHTML={ this.markdownText }></div>
             </div>
         );

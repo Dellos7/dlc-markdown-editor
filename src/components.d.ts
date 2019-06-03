@@ -12,6 +12,7 @@ export namespace Components {
   interface DlcMarkdownEditor {
     'bold': () => Promise<void>;
     'content': string;
+    'customElementSelector': string;
     'enableShortcuts': boolean;
     'h1': () => Promise<void>;
     'italics': () => Promise<void>;
@@ -57,6 +58,7 @@ declare global {
 declare namespace LocalJSX {
   interface DlcMarkdownEditor extends JSXBase.HTMLAttributes<HTMLDlcMarkdownEditorElement> {
     'content'?: string;
+    'customElementSelector'?: string;
     'enableShortcuts'?: boolean;
   }
   interface MyComponent extends JSXBase.HTMLAttributes<HTMLMyComponentElement> {
