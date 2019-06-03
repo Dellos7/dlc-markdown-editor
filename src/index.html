@@ -13,6 +13,9 @@
     .markdown-editor-wrapper {
       height: 50vh;
     }
+    dlc-markdown-editor::part(editor) {
+      color: green;
+    }
   </style>
 
 </head>
@@ -27,8 +30,11 @@
   <script>
 
     let dlcMdEditor = document.querySelector('dlc-markdown-editor');
-    //dlcMdEditor.customElementSelector = 'input';
-    //dlcMdEditor.customElementSelector = 'textarea';
+    //let input = document.createElement('input');
+    //let input = document.createElement('textarea');
+    /*let input = document.createElement('ion-textarea');
+    input.autofocus = true;
+    dlcMdEditor.customEditorElement = input;*/
     dlcMdEditor.content = `# Simple JS Markdown Editor
 
 **Hello!** this is a *simple* \`js\` markdown editor!

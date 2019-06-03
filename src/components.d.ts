@@ -10,14 +10,34 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 export namespace Components {
   interface DlcMarkdownEditor {
+    /**
+    * Bold the selected text
+    */
     'bold': () => Promise<void>;
+    /**
+    * To set the content of the editor element (input, textarea...)
+    */
     'content': string;
-    'customElementSelector': string;
+    /**
+    * We can pass in a custom element to handle the editor (<textarea>, <input> or an element that contains one of these)
+    */
+    'customEditorElement': HTMLInputElement | HTMLTextAreaElement;
+    /**
+    * Whether enable or not the keyboard shortcuts
+    */
     'enableShortcuts': boolean;
+    /**
+    * Convert the selected text into an h1
+    */
     'h1': () => Promise<void>;
+    /**
+    * Format the selected text into italics
+    */
     'italics': () => Promise<void>;
+    /**
+    * Create a link onto the selected text
+    */
     'link': () => Promise<void>;
-    'setContent': (content: string) => Promise<void>;
   }
   interface MyComponent {
     /**
@@ -57,8 +77,17 @@ declare global {
 
 declare namespace LocalJSX {
   interface DlcMarkdownEditor extends JSXBase.HTMLAttributes<HTMLDlcMarkdownEditorElement> {
+    /**
+    * To set the content of the editor element (input, textarea...)
+    */
     'content'?: string;
-    'customElementSelector'?: string;
+    /**
+    * We can pass in a custom element to handle the editor (<textarea>, <input> or an element that contains one of these)
+    */
+    'customEditorElement'?: HTMLInputElement | HTMLTextAreaElement;
+    /**
+    * Whether enable or not the keyboard shortcuts
+    */
     'enableShortcuts'?: boolean;
   }
   interface MyComponent extends JSXBase.HTMLAttributes<HTMLMyComponentElement> {

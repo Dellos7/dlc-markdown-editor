@@ -54,4 +54,8 @@ export abstract class GenericSurroundingSymbolsStyler implements StylerInterface
         this.editorElement = element;
     }
 
+    getElement(): HTMLInputElement | HTMLTextAreaElement {
+        return this.editorElement;
+    }
+
 }

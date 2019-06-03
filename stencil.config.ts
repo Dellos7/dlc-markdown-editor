@@ -25,5 +25,7 @@ export const config: Config = {
       src: '../node_modules/showdown/dist/showdown.min.js',
       dest: 'assets/js/showdown.min.js'
     }
-  ]
+  ],
+  globalScript: 'src/global/app.ts',
+  globalStyle: 'src/global/app.scss'
 };

@@ -6,5 +6,6 @@ export interface StylerInterface {
     hasHalfStyle( _selectedText: string ): boolean;
     removeStyle( _selectedText: string ): string;
     setElement( element: HTMLInputElement | HTMLTextAreaElement ): any;
+    getElement(): HTMLInputElement | HTMLTextAreaElement;
 
 }

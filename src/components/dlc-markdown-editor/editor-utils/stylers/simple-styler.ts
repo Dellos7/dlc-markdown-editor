@@ -28,5 +28,9 @@ export abstract class SimpleStyler implements StylerInterface {
         this.editorElement = element;
     }
 
+    getElement(): HTMLInputElement | HTMLTextAreaElement {
+        return this.editorElement;
+    }
+
 
 }

@@ -3,7 +3,7 @@ import { StylerFactoryInterface } from './styler-factory-interface';
 import { StylerInterface } from '../styler-interface';
 export class DefaultStylerFactory implements StylerFactoryInterface {
 
-    constructor( private element: HTMLInputElement | HTMLTextAreaElement ) {
+    constructor( public element: HTMLInputElement | HTMLTextAreaElement ) {
 
     }
 
