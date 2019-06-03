@@ -1,0 +1,1 @@
+import{e as s,g as o}from"./p-2b8e2d69.js";class t{constructor(o){s(this,o)}pop(){const s=this.el.closest("ion-nav");s&&s.pop({skipIfBusy:!0})}get el(){return o(this)}}export{t as ion_nav_pop};

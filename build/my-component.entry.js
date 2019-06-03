@@ -1,4 +1,4 @@
-import { e as registerInstance, f as h } from './dlc-markdown-editor-e25a37eb.js';
+import { e as registerInstance, f as h } from './dlc-markdown-editor-3c7af0f3.js';
 
 function format(first, middle, last) {
     return ((first || '') +

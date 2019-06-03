@@ -1,4 +1,4 @@
-import { e as registerInstance, f as h, g as getElement } from './dlc-markdown-editor-e25a37eb.js';
+import { e as registerInstance, f as h, g as getElement } from './dlc-markdown-editor-3c7af0f3.js';
 
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
@@ -1729,6 +1729,9 @@ class SimpleStyler {
     setElement(element) {
         this.editorElement = element;
     }
+    getElement() {
+        return this.editorElement;
+    }
 }
 
 class LinkStyler extends SimpleStyler {
@@ -1825,6 +1828,9 @@ class GenericSurroundingSymbolsStyler {
     }
     setElement(element) {
         this.editorElement = element;
+    }
+    getElement() {
+        return this.editorElement;
     }
 }
 
@@ -1972,6 +1978,9 @@ class Heading1Styler extends SimpleStyler {
 class DlcMarkdownEditor {
     constructor(hostRef) {
         registerInstance(this, hostRef);
+        /**
+         * Whether enable or not the keyboard shortcuts
+         */
         this.enableShortcuts = true;
         this.stylers = {
             bold: new BoldStyler(),
@@ -1983,24 +1992,56 @@ class DlcMarkdownEditor {
     componentDidLoad() {
         this.setEditorElement();
         this.convertTextToMarkdownListener();
+        this.setEditorElContent();
+        //Last action
         this.prepareEditor();
     }
+    componentDidUpdate() {
+        this.setEditorElement();
+        this.convertTextToMarkdownListener();
+        this.setEditorElContent();
+        this.modifyElInStylerFactory();
+    }
+    /**
+     * Bold the selected text
+     */
     async bold() {
         this.stylerFactoryInterface.style(this.stylers.bold);
     }
+    /**
+     * Format the selected text into italics
+     */
     async italics() {
         this.stylerFactoryInterface.style(this.stylers.italics);
     }
+    /**
+     * Create a link onto the selected text
+     */
     async link() {
         this.stylerFactoryInterface.style(this.stylers.link);
     }
+    /**
+     * Convert the selected text into an h1
+     */
     async h1() {
         this.stylerFactoryInterface.style(this.stylers.h1);
     }
-    async setContent(content) {
-        this.content = content;
+    watchCustomEditorElement(newValue, oldValue) {
+        //When the customEditorElement is modified (user passes a new one),
+        //we must reset the attributes that were set
+        if (oldValue !== newValue) {
+            this.editorEl = null;
+            this.outerHtml = null;
+        }
+    }
+    watchContent(newValue, oldValue) {
+        //If user passes a new content, synchronize the editor element value with that content
+        if (oldValue !== newValue) {
+            this.editorEl.value = newValue;
+        }
     }
     prepareEditor() {
+        // Prepare the editor: enable shortcuts, create the styler factory with the element
         this.stylerFactoryInterface = new DefaultStylerFactory(this.editorEl);
         if (this.enableShortcuts) {
             let editorShortcutUtils = new EditorShortcutUtils(this.stylerFactoryInterface);
@@ -2008,26 +2049,93 @@ class DlcMarkdownEditor {
         }
     }
     setEditorElement() {
-        this.editorEl = this.el.shadowRoot.querySelector('.editor');
-    }
-    async convertTextToMarkdownListener() {
+        //The editor element must be set looking for in the Shadow DOM. It could be a textarea or an input element,
+        //and it could be nested in any children of the shadow root
         if (!this.editorEl) {
-            await this.setEditorElement();
+            //this.editorEl = this.el.shadowRoot.querySelector('.editor');
+            this.editorEl = this.el.shadowRoot.querySelector('textarea, input');
         }
-        this.editorEl.oninput = _ => {
-            this.content = this.editorEl.value;
-            this.updateMarkdownPreview();
-        };
+    }
+    convertTextToMarkdownListener() {
+        //We must handle the user inputs in the editor and update the markdown
+        if (this.editorEl) {
+            this.editorEl.oninput = _ => {
+                this.content = this.editorEl.value;
+                this.updateMarkdownPreview();
+            };
+        }
     }
     updateMarkdownPreview() {
+        //Convert the editor value (content) into markdown
         this.markdownText = marked(this.content);
+    }
+    getEditorElementHtml() {
+        return this.customEditorElement ? this._getEditorElementCustom() : this._getEditorElementDefault();
+    }
+    /*    private _getEditorElementCustom() {
+            if (this.editorEl) {
+                return this.editorEl.outerHTML;
+            }
+            let el = document.createElement(this.customEditorElement) as HTMLInputElement;
+            if (el) {
+                el.className = 'editor';
+                el.contentEditable = 'true';
+                return el.outerHTML;
+            }
+            return null;
+        }*/
+    _getEditorElementCustom() {
+        //Custom editor element. Retrieve the element passed in by the user and assign the required properties
+        //Then, return the outerHTML in order to print it in the render function
+        if (this.outerHtml) {
+            return this.outerHtml;
+        }
+        let el = this.customEditorElement;
+        if (el) {
+            el.className = `editor${el.className ? " " + el.className : ""}`;
+            el.contentEditable = 'true';
+            el.setAttribute('part', 'editor');
+            this.outerHtml = el.outerHTML;
+            return el.outerHTML;
+        }
+        return null;
+    }
+    _getEditorElementDefault() {
+        //If user didn't pass in a custom element, we create by default a textarea for the editor
+        if (this.outerHtml) {
+            //return this.editorEl.outerHTML;
+            return this.outerHtml;
+        }
+        let el = document.createElement('textarea');
+        if (el) {
+            el.className = 'editor';
+            el.contentEditable = 'true';
+            el.setAttribute('part', 'editor');
+            this.outerHtml = el.outerHTML;
+            return el.outerHTML;
+        }
+        return null;
+    }
+    setEditorElContent() {
+        if (this.editorEl && this.content && !this.editorEl.value) {
+            this.editorEl.value = this.content;
+        }
+    }
+    modifyElInStylerFactory() {
+        if (this.editorEl && this.stylerFactoryInterface.element !== this.editorEl) {
+            this.stylerFactoryInterface.element = this.editorEl;
+        }
     }
     render() {
         this.updateMarkdownPreview();
-        return (h("div", { class: "wrapper" }, h("div", { class: "buttons" }, h("button", { class: "button button-bold", onClick: _ => this.bold() }, "Bold"), h("button", { class: "button button-italics", onClick: _ => this.italics() }, "Italics"), h("button", { class: "button button-link", onClick: _ => this.link() }, "Link"), h("button", { class: "button button-h1", onClick: _ => this.h1() }, "H1")), h("textarea", { class: "editor", contenteditable: true, part: "editor", value: this.content }), h("div", { class: "previewer", part: "previewer", innerHTML: this.markdownText })));
+        return (h("div", { class: "wrapper" }, h("div", { class: "buttons" }, h("button", { class: "button button-bold", onClick: _ => this.bold() }, "Bold"), h("button", { class: "button button-italics", onClick: _ => this.italics() }, "Italics"), h("button", { class: "button button-link", onClick: _ => this.link() }, "Link"), h("button", { class: "button button-h1", onClick: _ => this.h1() }, "H1")), h("span", { class: "editor-wrapper", innerHTML: this.getEditorElementHtml() }), h("div", { class: "previewer", part: "previewer", innerHTML: this.markdownText })));
     }
     get el() { return getElement(this); }
-    static get style() { return ".wrapper {\n  height: 100%;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-pack: center;\n  justify-content: center;\n}\n\n.editor {\n  height: 100%;\n  width: 45%;\n  margin: 1rem;\n}\n\n.previewer {\n  height: 100%;\n  width: 45%;\n  margin: 1rem;\n  display: inline-block;\n  overflow-y: scroll;\n  border: 1px solid black;\n}"; }
+    static get watchers() { return {
+        "customEditorElement": ["watchCustomEditorElement"],
+        "content": ["watchContent"]
+    }; }
+    static get style() { return ".wrapper {\n  height: 100%;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-pack: center;\n  justify-content: center;\n}\n\n.editor-wrapper {\n  height: 100%;\n  width: 45%;\n  margin: 1rem;\n}\n\n.editor {\n  /*height: 100%;\n  width: 45%;\n  margin: 1rem;*/\n  height: 100%;\n  width: 100%;\n}\n\n.previewer {\n  height: 100%;\n  width: 45%;\n  margin: 1rem;\n  display: inline-block;\n  overflow-y: scroll;\n  border: 1px solid black;\n}"; }
 }
 
 export { DlcMarkdownEditor as dlc_markdown_editor };

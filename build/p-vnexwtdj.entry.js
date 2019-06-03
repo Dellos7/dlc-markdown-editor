@@ -1,0 +1,1 @@
+import{e as t,i as s,f as r,k as e}from"./p-2b8e2d69.js";class n{constructor(s){t(this,s)}hostData(){return{class:{[`${s(this)}`]:!0}}}__stencil_render(){return r("slot",null)}render(){return r(e,this.hostData(),this.__stencil_render())}static get style(){return":host{display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap}"}}export{n as ion_row};

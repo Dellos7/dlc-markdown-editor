@@ -1,0 +1,1 @@
+System.register([],function(n,i){"use strict";return{execute:function(){n({a:i,b:e,c:t,d:c});function i(){var n=window.TapticEngine;if(n){n.selection()}}function e(){var n=window.TapticEngine;if(n){n.gestureSelectionStart()}}function t(){var n=window.TapticEngine;if(n){n.gestureSelectionChanged()}}function c(){var n=window.TapticEngine;if(n){n.gestureSelectionEnd()}}}}});

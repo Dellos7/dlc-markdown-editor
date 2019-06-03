@@ -1,0 +1,1 @@
+import{e as s,g as o}from"./p-2b8e2d69.js";class t{constructor(o){s(this,o)}push(){const s=this.el.closest("ion-nav"),o=this.component;s&&void 0!==o&&s.push(o,this.componentProps,{skipIfBusy:!0})}get el(){return o(this)}}export{t as ion_nav_push};

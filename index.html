@@ -2,9 +2,17 @@
     .markdown-editor-wrapper {
       height: 50vh;
     }
+    dlc-markdown-editor::part(editor) {
+      color: green;
+    }
   </style> </head> <body> <!--<my-component first="Stencil" last="'Don't call me a framework' JS"></my-component>--> <div class="markdown-editor-wrapper"> <dlc-markdown-editor enableshortcuts="true"></dlc-markdown-editor> </div> <script>
 
     let dlcMdEditor = document.querySelector('dlc-markdown-editor');
+    //let input = document.createElement('input');
+    //let input = document.createElement('textarea');
+    /*let input = document.createElement('ion-textarea');
+    input.autofocus = true;
+    dlcMdEditor.customEditorElement = input;*/
     dlcMdEditor.content = `# Simple JS Markdown Editor
 
 **Hello!** this is a *simple* \`js\` markdown editor!
