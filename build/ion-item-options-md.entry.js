@@ -1,4 +1,4 @@
-import { e as registerInstance, i as createEvent, j as getContext, h as getIonMode, g as getElement, f as h, k as Host } from './dlc-markdown-editor-3c7af0f3.js';
+import { e as registerInstance, i as createEvent, j as getContext, h as getIonMode, g as getElement, f as h, k as Host } from './dlc-markdown-editor-0cf5bcf8.js';
 import { h as isEndSide } from './chunk-f3597f81.js';
 
 class ItemOptions {

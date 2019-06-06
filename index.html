@@ -2,10 +2,28 @@
     .markdown-editor-wrapper {
       height: 50vh;
     }
+
     dlc-markdown-editor::part(editor) {
-      color: green;
+      font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+      font-size: 1rem;
+      border-radius: 3px;
+      border: 1px solid #d1d5da;
+      box-shadow: inset 0 1px 2px rgba(27,31,35,.075);
+      background-color: #fafbfc;
     }
-  </style> </head> <body> <!--<my-component first="Stencil" last="'Don't call me a framework' JS"></my-component>--> <div class="markdown-editor-wrapper"> <dlc-markdown-editor enableshortcuts="true"></dlc-markdown-editor> </div> <script>
+
+    dlc-markdown-editor::part(editor):focus-within{
+      border-color: #2188ff;
+      box-shadow: inset 0 1px 2px rgba(27,31,35,.075), 0 0 0 0.2em rgba(3,102,214,.3);
+      outline: none;
+    }
+
+    dlc-markdown-editor::part(previewer) {
+      border-radius: 3px;
+      border: 1px solid #d1d5da;
+      box-shadow: inset 0 1px 2px rgba(27,31,35,.075);
+    }
+  </style> </head> <body> <!--<my-component first="Stencil" last="'Don't call me a framework' JS"></my-component>--> <div class="markdown-editor-wrapper"> <dlc-markdown-editor enableshortcuts="true" previewerstyle="github"></dlc-markdown-editor> </div> <script>
 
     let dlcMdEditor = document.querySelector('dlc-markdown-editor');
     //let input = document.createElement('input');
@@ -13,6 +31,7 @@
     /*let input = document.createElement('ion-textarea');
     input.autofocus = true;
     dlcMdEditor.customEditorElement = input;*/
+    //dlcMdEditor.setPreviewerClasses('markdown-body');
     dlcMdEditor.content = `# Simple JS Markdown Editor
 
 **Hello!** this is a *simple* \`js\` markdown editor!
@@ -41,4 +60,13 @@ Currently only these shortcuts are supported:
 By [David López Castellote](https://dlopezcastellote.dev/)
 `;
 
-  </script> </body></html>
+  </script> <script>
+if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+  // auto-unregister service worker during dev mode
+  navigator.serviceWorker.getRegistration().then(function(registration) {
+    if (registration) {
+      registration.unregister().then(function() { location.reload(true) });
+    }
+  });
+}
+</script></body></html>

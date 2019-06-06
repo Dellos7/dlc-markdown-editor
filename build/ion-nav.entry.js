@@ -1,7 +1,7 @@
-import { e as registerInstance, i as createEvent, j as getContext, n as Build, h as getIonMode, f as h, g as getElement } from './dlc-markdown-editor-3c7af0f3.js';
+import { e as registerInstance, i as createEvent, j as getContext, q as Build, h as getIonMode, f as h, g as getElement } from './dlc-markdown-editor-0cf5bcf8.js';
 import { i as assert } from './chunk-f3597f81.js';
 import { a as attachComponent } from './chunk-b3ecd786.js';
-import { b as lifecycle, c as LIFECYCLE_WILL_UNLOAD, d as LIFECYCLE_WILL_LEAVE, e as LIFECYCLE_DID_LEAVE, f as transition, g as setPageHidden } from './chunk-f3a7715e.js';
+import { b as lifecycle, c as LIFECYCLE_WILL_UNLOAD, d as LIFECYCLE_WILL_LEAVE, e as LIFECYCLE_DID_LEAVE, f as transition, g as setPageHidden } from './chunk-0cccc6a3.js';
 
 const VIEW_STATE_NEW = 1;
 const VIEW_STATE_ATTACHED = 2;
@@ -135,7 +135,7 @@ class Nav {
     }
     async componentDidLoad() {
         this.rootChanged();
-        this.gesture = (await __sc_import_dlc_markdown_editor('./swipe-back-97b605aa.js')).createSwipeBackGesture(this.el, this.canStart.bind(this), this.onStart.bind(this), this.onMove.bind(this), this.onEnd.bind(this));
+        this.gesture = (await __sc_import_dlc_markdown_editor('./swipe-back-6565670d.js')).createSwipeBackGesture(this.el, this.canStart.bind(this), this.onStart.bind(this), this.onMove.bind(this), this.onEnd.bind(this));
         this.swipeGestureChanged();
     }
     componentDidUnload() {

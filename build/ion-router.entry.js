@@ -1,4 +1,4 @@
-import { e as registerInstance, i as createEvent, j as getContext, g as getElement } from './dlc-markdown-editor-3c7af0f3.js';
+import { e as registerInstance, i as createEvent, j as getContext, g as getElement } from './dlc-markdown-editor-0cf5bcf8.js';
 import { j as debounce } from './chunk-f3597f81.js';
 
 const ROUTER_INTENT_NONE = 'root';

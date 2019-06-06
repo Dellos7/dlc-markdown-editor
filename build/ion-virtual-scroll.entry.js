@@ -1,4 +1,4 @@
-import { e as registerInstance, p as readTask, m as writeTask, f as h, g as getElement, k as Host } from './dlc-markdown-editor-3c7af0f3.js';
+import { e as registerInstance, n as readTask, m as writeTask, f as h, g as getElement, k as Host } from './dlc-markdown-editor-0cf5bcf8.js';
 
 const CELL_TYPE_ITEM = 'item';
 const CELL_TYPE_HEADER = 'header';

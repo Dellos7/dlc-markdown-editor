@@ -1,4 +1,4 @@
-import { e as registerInstance, j as getContext, h as getIonMode, g as getElement, f as h, k as Host, l as isPlatform } from './dlc-markdown-editor-3c7af0f3.js';
+import { e as registerInstance, j as getContext, h as getIonMode, g as getElement, f as h, k as Host, l as isPlatform } from './dlc-markdown-editor-0cf5bcf8.js';
 import { a as rIC } from './chunk-f3597f81.js';
 
 class App {
@@ -42,7 +42,7 @@ function importHardwareBackButton(win, config) {
 function importStatusTap(win, config) {
     const statusTap = config.getBoolean('statusTap', isPlatform(win, 'hybrid'));
     if (statusTap) {
-        __sc_import_dlc_markdown_editor('./status-tap-67222de6.js').then(module => module.startStatusTap(win));
+        __sc_import_dlc_markdown_editor('./status-tap-27fac6d2.js').then(module => module.startStatusTap(win));
     }
 }
 function importFocusVisible(win) {

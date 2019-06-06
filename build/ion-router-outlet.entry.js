@@ -1,6 +1,6 @@
-import { e as registerInstance, i as createEvent, j as getContext, h as getIonMode, f as h, g as getElement } from './dlc-markdown-editor-3c7af0f3.js';
+import { e as registerInstance, i as createEvent, j as getContext, h as getIonMode, f as h, g as getElement } from './dlc-markdown-editor-0cf5bcf8.js';
 import { a as attachComponent, b as detachComponent } from './chunk-b3ecd786.js';
-import { f as transition } from './chunk-f3a7715e.js';
+import { f as transition } from './chunk-0cccc6a3.js';
 
 class RouterOutlet {
     constructor(hostRef) {
@@ -25,7 +25,7 @@ class RouterOutlet {
         this.ionNavWillLoad.emit();
     }
     async componentDidLoad() {
-        this.gesture = (await __sc_import_dlc_markdown_editor('./swipe-back-97b605aa.js')).createSwipeBackGesture(this.el, () => !!this.swipeHandler && this.swipeHandler.canStart(), () => this.swipeHandler && this.swipeHandler.onStart(), step => this.ani && this.ani.progressStep(step), (shouldComplete, step, dur) => {
+        this.gesture = (await __sc_import_dlc_markdown_editor('./swipe-back-6565670d.js')).createSwipeBackGesture(this.el, () => !!this.swipeHandler && this.swipeHandler.canStart(), () => this.swipeHandler && this.swipeHandler.onStart(), step => this.ani && this.ani.progressStep(step), (shouldComplete, step, dur) => {
             if (this.ani) {
                 this.ani.progressEnd(shouldComplete, step, dur);
             }

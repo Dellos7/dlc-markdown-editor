@@ -1,4 +1,4 @@
-import { e as registerInstance, j as getContext, h as getIonMode, g as getElement, f as h, k as Host } from './dlc-markdown-editor-3c7af0f3.js';
+import { e as registerInstance, j as getContext, h as getIonMode, g as getElement, f as h, k as Host } from './dlc-markdown-editor-0cf5bcf8.js';
 
 class RippleEffect {
     constructor(hostRef) {

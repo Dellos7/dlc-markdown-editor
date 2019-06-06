@@ -1,4 +1,4 @@
-import { e as registerInstance, i as createEvent, j as getContext, h as getIonMode, f as h, g as getElement, k as Host } from './dlc-markdown-editor-3c7af0f3.js';
+import { e as registerInstance, i as createEvent, j as getContext, h as getIonMode, f as h, g as getElement, k as Host } from './dlc-markdown-editor-0cf5bcf8.js';
 import { c as createColorClasses, d as hostContext } from './chunk-4d735167.js';
 import { f as clamp, g as debounceEvent } from './chunk-f3597f81.js';
 
@@ -145,7 +145,7 @@ class Range {
         this.emitStyle();
     }
     async componentDidLoad() {
-        this.gesture = (await __sc_import_dlc_markdown_editor('./index-b3da374b.js')).createGesture({
+        this.gesture = (await __sc_import_dlc_markdown_editor('./index-6d465cfc.js')).createGesture({
             el: this.rangeSlider,
             gestureName: 'range',
             gesturePriority: 100,

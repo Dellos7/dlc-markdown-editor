@@ -1,4 +1,4 @@
-import { e as registerInstance, i as createEvent, j as getContext, h as getIonMode, g as getElement, f as h, k as Host } from './dlc-markdown-editor-3c7af0f3.js';
+import { e as registerInstance, i as createEvent, j as getContext, h as getIonMode, g as getElement, f as h, k as Host } from './dlc-markdown-editor-0cf5bcf8.js';
 import { b as hapticSelectionStart, a as hapticSelectionChanged, c as hapticSelectionEnd } from './chunk-3a57d379.js';
 
 class ReorderGroup {
@@ -33,7 +33,7 @@ class ReorderGroup {
             await contentEl.componentOnReady();
             this.scrollEl = await contentEl.getScrollElement();
         }
-        this.gesture = (await __sc_import_dlc_markdown_editor('./index-b3da374b.js')).createGesture({
+        this.gesture = (await __sc_import_dlc_markdown_editor('./index-6d465cfc.js')).createGesture({
             el: this.el,
             gestureName: 'reorder',
             gesturePriority: 110,
