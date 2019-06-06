@@ -8,6 +8,7 @@ import { BoldStyler } from './editor-utils/stylers/bold-styler';
 import { ItalicsStyler } from './editor-utils/stylers/italics-styler';
 import { LinkStyler } from './editor-utils/stylers/link-styler';
 import { Heading1Styler } from './editor-utils/stylers/heading1-styler';
+import 'ionicons';
 
 @Component({
     tag: 'dlc-markdown-editor',
@@ -31,6 +32,18 @@ export class DlcMarkdownEditor {
      */
     @Prop({ reflect: true, mutable: true }) customEditorElement: HTMLInputElement | HTMLTextAreaElement;
 
+    @Prop({ attribute: 'previewerStyle' }) previewerStyle: 'github';
+
+    @Watch('previewerStyle')
+    setPreviewerStyle( newValue: string, _?: string ) {
+        if( newValue === 'github' ) {
+            this.setPreviewerClasses('markdown-body');
+        }
+        else {
+            this.removePreviewerClasses('markdown-body');
+        }
+    }
+
     private editorEl: HTMLTextAreaElement | HTMLInputElement;
     private stylerFactoryInterface: StylerFactoryInterface;
     private stylers = {
@@ -48,6 +61,7 @@ export class DlcMarkdownEditor {
         this.setEditorElement();
         this.convertTextToMarkdownListener();
         this.setEditorElContent();
+        this.setPreviewerStyle(this.previewerStyle);
         //Last action
         this.prepareEditor();
     }
@@ -89,6 +103,22 @@ export class DlcMarkdownEditor {
     @Method()
     async h1() {
         this.stylerFactoryInterface.style(this.stylers.h1);
+    }
+
+    @Method()
+    async setPreviewerClasses( ...classes: string[]) {
+        let previewer = this.el.shadowRoot.querySelector('.previewer');
+        if( previewer ) {
+            previewer.classList.add( ...classes );
+        }
+    }
+
+    @Method()
+    async removePreviewerClasses( ...classes: string[]) {
+        let previewer = this.el.shadowRoot.querySelector('.previewer');
+        if( previewer ) {
+            previewer.classList.remove( ...classes );
+        }
     }
 
     @Watch('customEditorElement')
@@ -208,15 +238,21 @@ export class DlcMarkdownEditor {
     render() {
         this.updateMarkdownPreview();
         return (
-            <div class="wrapper">
-                <div class="buttons">
-                    <button class="button button-bold" onClick={_ => this.bold()}>Bold</button>
-                    <button class="button button-italics" onClick={_ => this.italics()}>Italics</button>
-                    <button class="button button-link" onClick={_ => this.link()}>Link</button>
-                    <button class="button button-h1" onClick={_ => this.h1()}>H1</button>
-                </div>
+            <div class="wrapper" part="container">
                 {/*<textarea class="editor" contenteditable part="editor" value={this.content}></textarea>}*/}
-                <span class="editor-wrapper" innerHTML={this.getEditorElementHtml()}></span>
+                <div class="editor-wrapper">
+                    <div class="buttons">
+                        <button class="button button-bold" onClick={_ => this.bold()}><strong>B</strong></button>
+                        <button class="button button-italics" onClick={_ => this.italics()}><i>I</i></button>
+                        <button class="button button-link" onClick={_ => this.link()}><ion-icon name="link"></ion-icon></button>
+                        <button class="button button-h1" onClick={_ => this.h1()}>H<sub>1</sub></button>
+                        <button class="button button-h1" onClick={_ => this.h1()}>H<sub>2</sub></button>
+                        <button class="button button-h1" onClick={_ => this.h1()}>H<sub>3</sub></button>
+                    </div>
+                    <div class="editor-wrapper__area" innerHTML={this.getEditorElementHtml()}>
+
+                    </div>
+                </div>
                 <div class="previewer" part="previewer" innerHTML={this.markdownText}></div>
             </div>
         );

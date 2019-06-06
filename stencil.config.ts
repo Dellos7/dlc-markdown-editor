@@ -20,12 +20,6 @@ export const config: Config = {
   plugins: [
     sass()
   ],
-  copy: [
-    {
-      src: '../node_modules/showdown/dist/showdown.min.js',
-      dest: 'assets/js/showdown.min.js'
-    }
-  ],
   globalScript: 'src/global/app.ts',
   globalStyle: 'src/global/app.scss'
 };

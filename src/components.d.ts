@@ -38,6 +38,9 @@ export namespace Components {
     * Create a link onto the selected text
     */
     'link': () => Promise<void>;
+    'previewerStyle': 'github';
+    'removePreviewerClasses': (...classes: string[]) => Promise<void>;
+    'setPreviewerClasses': (...classes: string[]) => Promise<void>;
   }
   interface MyComponent {
     /**
@@ -56,6 +59,11 @@ export namespace Components {
 }
 
 declare global {
+
+  // Adding a global JSX for backcompatibility with legacy dependencies
+  export namespace JSX {
+    export interface Element {}
+  }
 
 
   interface HTMLDlcMarkdownEditorElement extends Components.DlcMarkdownEditor, HTMLStencilElement {}
@@ -89,6 +97,7 @@ declare namespace LocalJSX {
     * Whether enable or not the keyboard shortcuts
     */
     'enableShortcuts'?: boolean;
+    'previewerStyle'?: 'github';
   }
   interface MyComponent extends JSXBase.HTMLAttributes<HTMLMyComponentElement> {
     /**
