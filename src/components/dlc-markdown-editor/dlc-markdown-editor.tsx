@@ -107,7 +107,8 @@ export class DlcMarkdownEditor {
 
     @Method()
     async setPreviewerClasses( ...classes: string[]) {
-        let previewer = this.el.shadowRoot.querySelector('.previewer');
+        //let previewer = this.el.shadowRoot.querySelector('.previewer');
+        let previewer = this.el.shadowRoot.querySelector('.previewer-wrapper__area');
         if( previewer ) {
             previewer.classList.add( ...classes );
         }
@@ -115,10 +116,23 @@ export class DlcMarkdownEditor {
 
     @Method()
     async removePreviewerClasses( ...classes: string[]) {
-        let previewer = this.el.shadowRoot.querySelector('.previewer');
+        //let previewer = this.el.shadowRoot.querySelector('.previewer');
+        let previewer = this.el.shadowRoot.querySelector('.previewer-wrapper__area');
         if( previewer ) {
             previewer.classList.remove( ...classes );
         }
+    }
+
+    showPreviewer() {
+        let previewer = this.el.shadowRoot.querySelector('.previewer-wrapper') as HTMLElement;
+        previewer.style.display = 'initial';
+    }
+
+    closePreviewer() {
+        console.log('closePreviewer');
+        let previewer = this.el.shadowRoot.querySelector('.previewer-wrapper') as HTMLElement;
+        console.log(previewer);
+        previewer.style.display = 'none';
     }
 
     @Watch('customEditorElement')
@@ -242,18 +256,24 @@ export class DlcMarkdownEditor {
                 {/*<textarea class="editor" contenteditable part="editor" value={this.content}></textarea>}*/}
                 <div class="editor-wrapper">
                     <div class="buttons">
-                        <button class="button button-bold" onClick={_ => this.bold()}><strong>B</strong></button>
-                        <button class="button button-italics" onClick={_ => this.italics()}><i>I</i></button>
-                        <button class="button button-link" onClick={_ => this.link()}><ion-icon name="link"></ion-icon></button>
-                        <button class="button button-h1" onClick={_ => this.h1()}>H<sub>1</sub></button>
-                        <button class="button button-h1" onClick={_ => this.h1()}>H<sub>2</sub></button>
-                        <button class="button button-h1" onClick={_ => this.h1()}>H<sub>3</sub></button>
+                        <button class="button button__bold" onClick={_ => this.bold()}><strong>B</strong></button>
+                        <button class="button button__italics" onClick={_ => this.italics()}><i>I</i></button>
+                        <button class="button button__link" onClick={_ => this.link()}><ion-icon name="link"></ion-icon></button>
+                        <button class="button button__h1" onClick={_ => this.h1()}>H<sub>1</sub></button>
+                        <button class="button button__h2" onClick={_ => this.h1()}>H<sub>2</sub></button>
+                        <button class="button button__h3" onClick={_ => this.h1()}>H<sub>3</sub></button>
+                        <button class="button button__show-previewer" onClick={_ => this.showPreviewer()}><ion-icon name="search"></ion-icon></button>
                     </div>
-                    <div class="editor-wrapper__area" innerHTML={this.getEditorElementHtml()}>
-
-                    </div>
+                    <div class="editor-wrapper__area" innerHTML={this.getEditorElementHtml()}></div>
                 </div>
-                <div class="previewer" part="previewer" innerHTML={this.markdownText}></div>
+                {/*<div class="previewer" part="previewer" innerHTML={this.markdownText}></div>*/}
+                <div class="previewer-wrapper">
+                    <div class="buttons">
+                        <button class="button button-copy-html"><ion-icon name="copy"></ion-icon></button>
+                        <button class="button button__close-previewer" onClick={_ => this.closePreviewer()}><ion-icon name="close"></ion-icon></button>
+                    </div>
+                    <div class="previewer-wrapper__area" part="previewer" innerHTML={this.markdownText}></div>
+                </div>
             </div>
         );
     }

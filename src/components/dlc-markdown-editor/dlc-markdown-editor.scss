@@ -7,7 +7,7 @@
     display: flex;
     justify-content: center;
 
-    .editor-wrapper {  
+    .editor-wrapper, .previewer-wrapper {  
       height: 100%;
       width: 45%;
       margin: 0 .5rem;
@@ -21,9 +21,6 @@
     }
     
     .editor {
-        /*height: 100%;
-        width: 45%;
-        margin: 1rem;*/
         height: 100%;
         width: 100%;
         padding-left: .5rem;
@@ -31,7 +28,7 @@
         box-sizing: border-box;
     }
     
-    .previewer {
+    /*.previewer {
         height: 100%;
         width: 45%;
         //margin: 1rem;
@@ -40,6 +37,14 @@
         //Style
         border: 1px solid black;
         margin: 0 .5rem;
+    }*/
+
+    .previewer-wrapper__area {
+      overflow-y: scroll;
+      /*padding: 0 !important;
+      padding-left: .5rem !important;
+      padding-top: .5rem !important;
+      box-sizing: border-box;*/
     }
 }
 
@@ -94,18 +99,55 @@
 
   }
 
+  &__show-previewer {
+    display: none;
+  }
+
+  &__close-previewer {
+    display: none;
+  }
+
 }
 
 
 @import '~github-markdown-css/github-markdown.css';
 
 .markdown-body {
-    box-sizing: border-box;
-    padding: 30px;
+  box-sizing: border-box;
+  padding: 30px;
+}
+
+@media (max-width: 767px) {
+  .markdown-body {
+    padding: 15px;
   }
 
-  @media (max-width: 767px) {
-    .markdown-body {
-      padding: 15px;
+  //Hide previewer, make editor larger and enable preview button
+  .wrapper {
+    .previewer-wrapper {
+      display: none;
+      position: absolute;
+      z-index: 999;
+      //width: 100%;
+      margin: 0;
+      width: calc(100% - .5rem);
+      background-color: #fff;
+      opacity: 1;
+    }
+  
+    .editor-wrapper {
+      width: 100%;
     }
   }
+
+  .button {
+    &__show-previewer {
+      display: initial;
+    }
+    &__close-previewer {
+      display: initial;
+      margin-left: auto;
+    }
+  }
+
+}
