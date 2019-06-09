@@ -1,4 +1,4 @@
-import { r as registerInstance, d as getIonMode, e as createEvent, f as getContext, h, c as getElement, H as Host } from './dlc-markdown-editor-505a8a95.js';
+import { r as registerInstance, f as getIonMode, c as createEvent, i as getContext, h, e as getElement, H as Host } from './dlc-markdown-editor-d387313e.js';
 import { B as BACKDROP, p as present, d as dismiss, e as eventMethod } from './chunk-efd2c884.js';
 import { g as getClassMap } from './chunk-abd3a723.js';
 import { s as sanitizeDOMString } from './chunk-8d8e0c6f.js';

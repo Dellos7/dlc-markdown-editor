@@ -1,4 +1,4 @@
-import { r as registerInstance, e as createEvent, d as getIonMode, h, c as getElement, H as Host } from './dlc-markdown-editor-505a8a95.js';
+import { r as registerInstance, c as createEvent, f as getIonMode, h, e as getElement, H as Host } from './dlc-markdown-editor-d387313e.js';
 import { b as pickerController } from './chunk-efd2c884.js';
 import { h as hostContext } from './chunk-abd3a723.js';
 import { c as clamp, f as findItemLabel, a as renderHiddenInput } from './chunk-3702a6ef.js';

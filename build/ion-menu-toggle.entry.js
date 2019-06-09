@@ -1,4 +1,4 @@
-import { r as registerInstance, f as getContext, d as getIonMode, h, H as Host } from './dlc-markdown-editor-505a8a95.js';
+import { r as registerInstance, i as getContext, f as getIonMode, h, H as Host } from './dlc-markdown-editor-d387313e.js';
 
 class MenuToggle {
     constructor(hostRef) {

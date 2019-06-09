@@ -1,4 +1,4 @@
-import { r as registerInstance, f as getContext, h, d as getIonMode, c as getElement, H as Host } from './dlc-markdown-editor-505a8a95.js';
+import { r as registerInstance, i as getContext, h, f as getIonMode, e as getElement, H as Host } from './dlc-markdown-editor-d387313e.js';
 import { h as hostContext } from './chunk-abd3a723.js';
 
 class SkeletonText {

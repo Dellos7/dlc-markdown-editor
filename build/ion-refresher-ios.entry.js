@@ -1,4 +1,4 @@
-import { r as registerInstance, e as createEvent, f as getContext, d as getIonMode, c as getElement, h, H as Host } from './dlc-markdown-editor-505a8a95.js';
+import { r as registerInstance, c as createEvent, i as getContext, f as getIonMode, e as getElement, h, H as Host } from './dlc-markdown-editor-d387313e.js';
 
 class Refresher {
     constructor(hostRef) {
@@ -75,7 +75,7 @@ class Refresher {
         else {
             console.error('ion-refresher did not attach, make sure the parent is an ion-content.');
         }
-        this.gesture = (await __sc_import_dlc_markdown_editor('./index-3a50bd4a.js')).createGesture({
+        this.gesture = (await __sc_import_dlc_markdown_editor('./index-314f7f65.js')).createGesture({
             el: this.el.closest('ion-content'),
             gestureName: 'refresher',
             gesturePriority: 10,

@@ -1,8 +1,8 @@
-import { r as registerInstance, d as getIonMode, e as createEvent, f as getContext, h, c as getElement, H as Host } from './dlc-markdown-editor-505a8a95.js';
+import { r as registerInstance, f as getIonMode, c as createEvent, i as getContext, h, e as getElement, H as Host } from './dlc-markdown-editor-d387313e.js';
 import { B as BACKDROP, p as present, d as dismiss, e as eventMethod } from './chunk-efd2c884.js';
 import { g as getClassMap } from './chunk-abd3a723.js';
 import { a as attachComponent, d as detachComponent } from './chunk-a88b8db5.js';
-import { d as deepReady } from './chunk-8442f16e.js';
+import { d as deepReady } from './chunk-17c2cb2e.js';
 
 /**
  * iOS Popover Enter Animation

@@ -1,6 +1,6 @@
-import { r as registerInstance, e as createEvent, f as getContext, d as getIonMode, h, H as Host } from './dlc-markdown-editor-505a8a95.js';
+import { r as registerInstance, c as createEvent, i as getContext, f as getIonMode, h, H as Host } from './dlc-markdown-editor-d387313e.js';
 import { n as now } from './chunk-3702a6ef.js';
-import { GESTURE_CONTROLLER } from './index-3a50bd4a.js';
+import { GESTURE_CONTROLLER } from './index-314f7f65.js';
 
 class Backdrop {
     constructor(hostRef) {

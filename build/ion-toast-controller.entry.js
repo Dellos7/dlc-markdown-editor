@@ -1,4 +1,4 @@
-import { r as registerInstance, f as getContext } from './dlc-markdown-editor-505a8a95.js';
+import { r as registerInstance, i as getContext } from './dlc-markdown-editor-d387313e.js';
 import { c as createOverlay, a as dismissOverlay, g as getOverlay } from './chunk-efd2c884.js';
 
 class ToastController {

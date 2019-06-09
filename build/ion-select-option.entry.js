@@ -1,4 +1,4 @@
-import { r as registerInstance, e as createEvent, d as getIonMode, c as getElement, h, H as Host } from './dlc-markdown-editor-505a8a95.js';
+import { r as registerInstance, c as createEvent, f as getIonMode, e as getElement, h, H as Host } from './dlc-markdown-editor-d387313e.js';
 
 class SelectOption {
     constructor(hostRef) {

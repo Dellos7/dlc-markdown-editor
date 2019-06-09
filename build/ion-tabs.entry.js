@@ -1,4 +1,4 @@
-import { r as registerInstance, e as createEvent, f as getContext, h, c as getElement } from './dlc-markdown-editor-505a8a95.js';
+import { r as registerInstance, c as createEvent, i as getContext, h, e as getElement } from './dlc-markdown-editor-d387313e.js';
 
 /**
  * @slot - Content is placed between the named slots if provided without a slot.

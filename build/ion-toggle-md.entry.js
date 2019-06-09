@@ -1,4 +1,4 @@
-import { r as registerInstance, e as createEvent, f as getContext, d as getIonMode, h, c as getElement, H as Host } from './dlc-markdown-editor-505a8a95.js';
+import { r as registerInstance, c as createEvent, i as getContext, f as getIonMode, h, e as getElement, H as Host } from './dlc-markdown-editor-d387313e.js';
 import { c as createColorClasses, h as hostContext } from './chunk-abd3a723.js';
 import { f as findItemLabel, a as renderHiddenInput } from './chunk-3702a6ef.js';
 import { c as hapticSelection } from './chunk-cec2f2df.js';
@@ -61,7 +61,7 @@ class Toggle {
         this.emitStyle();
     }
     async componentDidLoad() {
-        this.gesture = (await __sc_import_dlc_markdown_editor('./index-3a50bd4a.js')).createGesture({
+        this.gesture = (await __sc_import_dlc_markdown_editor('./index-314f7f65.js')).createGesture({
             el: this.el,
             gestureName: 'toggle',
             gesturePriority: 100,

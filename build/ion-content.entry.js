@@ -1,4 +1,4 @@
-import { r as registerInstance, e as createEvent, f as getContext, d as getIonMode, i as isPlatform, h, c as getElement, H as Host } from './dlc-markdown-editor-505a8a95.js';
+import { r as registerInstance, c as createEvent, i as getContext, f as getIonMode, j as isPlatform, h, e as getElement, H as Host } from './dlc-markdown-editor-d387313e.js';
 import { c as createColorClasses, h as hostContext } from './chunk-abd3a723.js';
 
 /**

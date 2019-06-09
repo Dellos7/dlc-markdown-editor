@@ -1,4 +1,4 @@
-import { r as registerInstance, j as getMode, B as Build, h, H as Host, c as getElement, k as getAssetPath } from './dlc-markdown-editor-505a8a95.js';
+import { r as registerInstance, k as getMode, B as Build, h, H as Host, e as getElement, l as getAssetPath } from './dlc-markdown-editor-d387313e.js';
 
 let CACHED_MAP;
 const getIconMap = () => {

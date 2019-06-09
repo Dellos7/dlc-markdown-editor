@@ -1,4 +1,4 @@
-import { r as registerInstance, c as getElement } from './dlc-markdown-editor-505a8a95.js';
+import { r as registerInstance, e as getElement } from './dlc-markdown-editor-d387313e.js';
 
 class NavPush {
     constructor(hostRef) {

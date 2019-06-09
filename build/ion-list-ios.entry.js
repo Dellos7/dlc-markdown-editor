@@ -1,4 +1,4 @@
-import { r as registerInstance, d as getIonMode, c as getElement, h, H as Host } from './dlc-markdown-editor-505a8a95.js';
+import { r as registerInstance, f as getIonMode, e as getElement, h, H as Host } from './dlc-markdown-editor-d387313e.js';
 
 /**
  * @virtualProp {"ios" | "md"} mode - The mode determines which platform styles to use.
