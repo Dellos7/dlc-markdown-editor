@@ -15,9 +15,17 @@ export namespace Components {
     */
     'bold': () => Promise<void>;
     /**
+    * Close the previewer
+    */
+    'closePreviewer': () => Promise<void>;
+    /**
     * To set the content of the editor element (input, textarea...)
     */
     'content': string;
+    /**
+    * Count words
+    */
+    'countWords': () => Promise<number>;
     /**
     * We can pass in a custom element to handle the editor (<textarea>, <input> or an element that contains one of these)
     */
@@ -41,6 +49,10 @@ export namespace Components {
     'previewerStyle': 'github';
     'removePreviewerClasses': (...classes: string[]) => Promise<void>;
     'setPreviewerClasses': (...classes: string[]) => Promise<void>;
+    /**
+    * Show the previewer
+    */
+    'showPreviewer': () => Promise<void>;
   }
   interface MyComponent {
     /**
@@ -59,11 +71,6 @@ export namespace Components {
 }
 
 declare global {
-
-  // Adding a global JSX for backcompatibility with legacy dependencies
-  export namespace JSX {
-    export interface Element {}
-  }
 
 
   interface HTMLDlcMarkdownEditorElement extends Components.DlcMarkdownEditor, HTMLStencilElement {}

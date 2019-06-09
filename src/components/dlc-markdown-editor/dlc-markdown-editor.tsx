@@ -35,8 +35,8 @@ export class DlcMarkdownEditor {
     @Prop({ attribute: 'previewerStyle' }) previewerStyle: 'github';
 
     @Watch('previewerStyle')
-    setPreviewerStyle( newValue: string, _?: string ) {
-        if( newValue === 'github' ) {
+    setPreviewerStyle(newValue: string, _?: string) {
+        if (newValue === 'github') {
             this.setPreviewerClasses('markdown-body');
         }
         else {
@@ -64,6 +64,13 @@ export class DlcMarkdownEditor {
         this.setPreviewerStyle(this.previewerStyle);
         //Last action
         this.prepareEditor();
+
+        //Ir, va..... (evitar scroll de la página al hacer focus en el textarea)
+        this.el.shadowRoot.querySelector('textarea, input').addEventListener('focus', () => {
+            setTimeout( () => {
+                window.scrollTo(0, 0);
+            }, 10);
+        });
     }
 
     componentDidUpdate() {
@@ -106,33 +113,74 @@ export class DlcMarkdownEditor {
     }
 
     @Method()
-    async setPreviewerClasses( ...classes: string[]) {
+    async setPreviewerClasses(...classes: string[]) {
         //let previewer = this.el.shadowRoot.querySelector('.previewer');
         let previewer = this.el.shadowRoot.querySelector('.previewer-wrapper__area');
-        if( previewer ) {
-            previewer.classList.add( ...classes );
+        if (previewer) {
+            previewer.classList.add(...classes);
         }
     }
 
     @Method()
-    async removePreviewerClasses( ...classes: string[]) {
+    async removePreviewerClasses(...classes: string[]) {
         //let previewer = this.el.shadowRoot.querySelector('.previewer');
         let previewer = this.el.shadowRoot.querySelector('.previewer-wrapper__area');
-        if( previewer ) {
-            previewer.classList.remove( ...classes );
+        if (previewer) {
+            previewer.classList.remove(...classes);
         }
     }
 
-    showPreviewer() {
+    /**
+     * Show the previewer
+     */
+    @Method()
+    async showPreviewer() {
         let previewer = this.el.shadowRoot.querySelector('.previewer-wrapper') as HTMLElement;
-        previewer.style.display = 'initial';
+        //previewer.style.display = 'initial';
+        previewer.classList.add('previewer-wrapper__opened');
     }
 
-    closePreviewer() {
-        console.log('closePreviewer');
+    /**
+     * Close the previewer
+     */
+    @Method()
+    async closePreviewer() {
         let previewer = this.el.shadowRoot.querySelector('.previewer-wrapper') as HTMLElement;
-        console.log(previewer);
-        previewer.style.display = 'none';
+        //previewer.style.display = 'none';
+        previewer.classList.remove('previewer-wrapper__opened');
+    }
+
+    /**
+     * Count words
+     */
+    @Method()
+    async countWords() {
+        let s = this.content.replace(/(^\s*)|(\s*$)/gi, "");
+        s = s.replace(/[ ]{2,}/gi, " ");
+        s = s.replace(/\n /, "\n");
+        return s.split(' ').length;
+    }
+
+    copyHtmlToClipboard() {
+        let text = this.el.shadowRoot.querySelector('.previewer-wrapper__area').innerHTML;
+        navigator.clipboard.writeText(text).then( 
+            () => {
+                
+            }, 
+            () => {
+            if ( (document as any).selection) {
+                let range = (document.body as any).createTextRange();
+                range.moveToElementText(this.el.shadowRoot.querySelector('.previewer-wrapper__area'));
+                range.select().createTextRange();
+                document.execCommand("copy");
+            
+              } else if (window.getSelection) {
+                let range = document.createRange();
+                range.selectNode(this.el.shadowRoot.querySelector('.previewer-wrapper__area'));
+                window.getSelection().addRange(range);
+                document.execCommand("copy");
+              }
+        });
     }
 
     @Watch('customEditorElement')
@@ -262,14 +310,14 @@ export class DlcMarkdownEditor {
                         <button class="button button__h1" onClick={_ => this.h1()}>H<sub>1</sub></button>
                         <button class="button button__h2" onClick={_ => this.h1()}>H<sub>2</sub></button>
                         <button class="button button__h3" onClick={_ => this.h1()}>H<sub>3</sub></button>
-                        <button class="button button__show-previewer" onClick={_ => this.showPreviewer()}><ion-icon name="search"></ion-icon></button>
+                        <button class="button button__show-previewer" onClick={_ => this.showPreviewer()}><ion-icon name="eye"></ion-icon></button>
                     </div>
                     <div class="editor-wrapper__area" innerHTML={this.getEditorElementHtml()}></div>
                 </div>
                 {/*<div class="previewer" part="previewer" innerHTML={this.markdownText}></div>*/}
                 <div class="previewer-wrapper">
                     <div class="buttons">
-                        <button class="button button-copy-html"><ion-icon name="copy"></ion-icon></button>
+                        <button class="button button-copy-html" onClick={_ => this.copyHtmlToClipboard()}><ion-icon name="copy"></ion-icon></button>
                         <button class="button button__close-previewer" onClick={_ => this.closePreviewer()}><ion-icon name="close"></ion-icon></button>
                     </div>
                     <div class="previewer-wrapper__area" part="previewer" innerHTML={this.markdownText}></div>

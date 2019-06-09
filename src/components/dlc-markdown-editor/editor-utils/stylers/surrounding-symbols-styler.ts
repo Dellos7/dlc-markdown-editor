@@ -15,7 +15,7 @@ export abstract class GenericSurroundingSymbolsStyler implements StylerInterface
                 if (textHasUnselectedStyle) {
                     textHasStyle = textHasUnselectedStyle;
                     SelectionTextUtils.selectMoreText(this.editorElement, this._symbol.length, this._symbol.length);
-                    _selectedText = SelectionTextUtils.getSelectionText();
+                    _selectedText = SelectionTextUtils.getSelectionText(this.editorElement);
                 }
             }
             let insertText: string = textHasStyle ? this.removeStyle(_selectedText) : `${this._symbol}${_selectedText}${this._symbol}`;

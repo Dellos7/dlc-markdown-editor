@@ -26,6 +26,8 @@
         padding-left: .5rem;
         padding-top: .5rem;
         box-sizing: border-box;
+        user-select: text;
+        -webkit-user-select: text;
     }
     
     /*.previewer {
@@ -101,10 +103,18 @@
 
   &__show-previewer {
     display: none;
+    font-size: 2rem;
+    & ion-icon {
+      vertical-align: baseline;
+    }
   }
 
-  &__close-previewer {
+  &__close-previewer { 
     display: none;
+    font-size: 2rem;
+    & ion-icon {
+      vertical-align: baseline;
+    }
   }
 
 }
@@ -125,14 +135,31 @@
   //Hide previewer, make editor larger and enable preview button
   .wrapper {
     .previewer-wrapper {
-      display: none;
+      /*display: none;
       position: absolute;
       z-index: 999;
-      //width: 100%;
       margin: 0;
       width: calc(100% - .5rem);
       background-color: #fff;
-      opacity: 1;
+      opacity: 1;*/
+      
+      position: absolute;
+      z-index: 999;
+      margin: 0;
+      background-color: #fff;
+      top: 100%;
+      width: calc(100% - .5rem);
+      height: 0;
+      transition: all .2s ease-out;
+      opacity: 0;
+      overflow: hidden;
+      
+      &__opened {
+        height: calc(100% - .5rem);
+        top: .5rem;
+        transition: all .2s ease-in;
+        opacity: 1;
+      }
     }
   
     .editor-wrapper {
@@ -143,6 +170,7 @@
   .button {
     &__show-previewer {
       display: initial;
+      margin-left: auto;
     }
     &__close-previewer {
       display: initial;
@@ -150,4 +178,19 @@
     }
   }
 
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) { 
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 1rem;
+    background: #eee;
+  }
+
+  select,
+  textarea,
+  input {
+    font-size: 1rem;
+  }
 }

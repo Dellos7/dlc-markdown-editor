@@ -11,7 +11,7 @@
 
   <style>
     .markdown-editor-wrapper {
-      height: 50vh;
+      height: 90vh;
     }
 
     dlc-markdown-editor::part(editor) {
@@ -54,6 +54,7 @@
     input.autofocus = true;
     dlcMdEditor.customEditorElement = input;*/
     //dlcMdEditor.setPreviewerClasses('markdown-body');
+    //dlcMdEditor.showPreviewer();
     dlcMdEditor.content = `# Simple JS Markdown Editor
 
 **Hello!** this is a *simple* \`js\` markdown editor!
@@ -81,6 +82,12 @@ Currently only these shortcuts are supported:
 
 By [David López Castellote](https://dlopezcastellote.dev/)
 `;
+
+setTimeout( () => {
+  dlcMdEditor.countWords().then( (val) => {
+    console.log(`Words: ${val}`);
+  });
+}, 1000 );
 
   </script>
 

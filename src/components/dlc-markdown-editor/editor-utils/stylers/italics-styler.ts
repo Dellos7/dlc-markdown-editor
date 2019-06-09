@@ -26,7 +26,7 @@ export class ItalicsStyler extends GenericSurroundingSymbolsStyler {
                     if (textHasUnselectedStyle) {
                         textHasStyle = textHasUnselectedStyle;
                         SelectionTextUtils.selectMoreText(this.editorElement, this._symbol.length, this._symbol.length);
-                        _selectedText = SelectionTextUtils.getSelectionText();
+                        _selectedText = SelectionTextUtils.getSelectionText(this.editorElement);
                     }
                     insertText = `${this._symbol}${_selectedText}${this._symbol}`;
                 }
@@ -39,7 +39,7 @@ export class ItalicsStyler extends GenericSurroundingSymbolsStyler {
                     if (textHasUnselectedStyle) {
                         textHasStyle = textHasUnselectedStyle;
                         SelectionTextUtils.selectMoreText(this.editorElement, this._symbol.length, this._symbol.length);
-                        _selectedText = SelectionTextUtils.getSelectionText();
+                        _selectedText = SelectionTextUtils.getSelectionText(this.editorElement);
                     }
                 }
                 insertText = textHasStyle ? this.removeStyle( _selectedText ) : `${this._symbol}${_selectedText}${this._symbol}`;

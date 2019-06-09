@@ -21,8 +21,8 @@
     "test.watch": "stencil test --spec --e2e --watchAll"
   },
   "devDependencies": {
-    "@stencil/core": "1.0.0-beta.8",
-    "@ionic/core": "one"
+    "@ionic/core": "one",
+    "@stencil/core": "^1.0.2"
   },
   "license": "MIT",
   "dependencies": {

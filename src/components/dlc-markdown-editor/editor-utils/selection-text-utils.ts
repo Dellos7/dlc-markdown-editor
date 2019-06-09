@@ -3,14 +3,20 @@ export class SelectionTextUtils {
     /**
      * Gets the current selected text
      */
-    public static getSelectionText() {
+/*    public static getSelectionText() {
         var text = "";
-        if (window.getSelection) {
+        if (window.getSelection()) {
             text = window.getSelection().toString();
         } else if ((document as any).selection && (document as any).selection.type != "Control") {
             text = (document as any).selection.createRange().text;
         }
         return text;
+    }*/
+
+    public static getSelectionText( el: HTMLTextAreaElement | HTMLInputElement ) {
+        let ss = el.selectionStart;
+        let se = el.selectionEnd;
+        return el.value.substring(ss, se);
     }
 
     /**
