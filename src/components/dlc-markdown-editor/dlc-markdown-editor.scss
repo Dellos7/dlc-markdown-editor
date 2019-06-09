@@ -127,6 +127,18 @@
   padding: 30px;
 }
 
+@media (min-width: 768px) {
+  /**
+  * Show the editor properly when page is large
+  **/
+  .editor-wrapper {
+    &.disable-scroll {
+      opacity: 1;
+      overflow-y: initial;
+    }
+  }
+}
+
 @media (max-width: 767px) {
   .markdown-body {
     padding: 15px;
@@ -135,14 +147,6 @@
   //Hide previewer, make editor larger and enable preview button
   .wrapper {
     .previewer-wrapper {
-      /*display: none;
-      position: absolute;
-      z-index: 999;
-      margin: 0;
-      width: calc(100% - .5rem);
-      background-color: #fff;
-      opacity: 1;*/
-      
       position: absolute;
       z-index: 999;
       margin: 0;
@@ -150,20 +154,24 @@
       top: 100%;
       width: calc(100% - .5rem);
       height: 0;
-      transition: all .2s ease-out;
+      transition: all .2s ease-out; //Close transition
       opacity: 0;
-      overflow: hidden;
+      overflow: hidden; //Do not fill a visual space in the page
       
       &__opened {
         height: calc(100% - .5rem);
         top: .5rem;
-        transition: all .2s ease-in;
+        transition: all .2s ease-in; //Open transition
         opacity: 1;
       }
     }
   
     .editor-wrapper {
       width: 100%;
+      &.disable-scroll {
+        opacity: 0;
+        overflow-y: hidden;
+      }
     }
   }
 
@@ -180,6 +188,9 @@
 
 }
 
+/**
+* Disable zoom when focus on input/textarea (must set font-size to 16px -> 1rem)
+**/
 @media screen and (-webkit-min-device-pixel-ratio:0) { 
   select:focus,
   textarea:focus,

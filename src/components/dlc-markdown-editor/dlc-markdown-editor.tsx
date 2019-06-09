@@ -1,4 +1,4 @@
-import { Component, h, State, Prop, Method, Watch, Element } from '@stencil/core';
+import { Component, h, State, Prop, Method, Watch, Element, Event, EventEmitter } from '@stencil/core';
 import marked from 'marked';
 import { EditorShortcutUtils } from './editor-utils/shortcuts/editor-shortcut-utils';
 import { StylerFactoryInterface } from './editor-utils/stylers/factory/styler-factory-interface';
@@ -32,7 +32,18 @@ export class DlcMarkdownEditor {
      */
     @Prop({ reflect: true, mutable: true }) customEditorElement: HTMLInputElement | HTMLTextAreaElement;
 
+    /**
+     * Previewer style. Default is 'github' style (currently only supporting github)
+     */
     @Prop({ attribute: 'previewerStyle' }) previewerStyle: 'github';
+
+    //TODO: connect is @deprecated
+    @Prop({ connect: 'ion-toast-controller' }) toastCtrl: HTMLIonToastControllerElement | null = null;
+
+    /**
+     * Event that gets called once the content has changed (it's also called if we pass in the content from a prop)
+     */
+    @Event() contentChanged: EventEmitter;
 
     @Watch('previewerStyle')
     setPreviewerStyle(newValue: string, _?: string) {
@@ -66,6 +77,7 @@ export class DlcMarkdownEditor {
         this.prepareEditor();
 
         //Ir, va..... (evitar scroll de la página al hacer focus en el textarea)
+        //TODO: IMPROVE THIS PLEASE
         this.el.shadowRoot.querySelector('textarea, input').addEventListener('focus', () => {
             setTimeout( () => {
                 window.scrollTo(0, 0);
@@ -114,7 +126,6 @@ export class DlcMarkdownEditor {
 
     @Method()
     async setPreviewerClasses(...classes: string[]) {
-        //let previewer = this.el.shadowRoot.querySelector('.previewer');
         let previewer = this.el.shadowRoot.querySelector('.previewer-wrapper__area');
         if (previewer) {
             previewer.classList.add(...classes);
@@ -123,7 +134,6 @@ export class DlcMarkdownEditor {
 
     @Method()
     async removePreviewerClasses(...classes: string[]) {
-        //let previewer = this.el.shadowRoot.querySelector('.previewer');
         let previewer = this.el.shadowRoot.querySelector('.previewer-wrapper__area');
         if (previewer) {
             previewer.classList.remove(...classes);
@@ -135,9 +145,14 @@ export class DlcMarkdownEditor {
      */
     @Method()
     async showPreviewer() {
+        //Toggle opened class in order to animate the previewer open from the bottom
         let previewer = this.el.shadowRoot.querySelector('.previewer-wrapper') as HTMLElement;
-        //previewer.style.display = 'initial';
         previewer.classList.add('previewer-wrapper__opened');
+        //Add disable-scroll class to hide the editor while previewing
+        setTimeout( () => {
+            let editor = this.el.shadowRoot.querySelector('.editor-wrapper') as HTMLElement;
+            editor.classList.add('disable-scroll');
+        }, 500 );
     }
 
     /**
@@ -145,42 +160,103 @@ export class DlcMarkdownEditor {
      */
     @Method()
     async closePreviewer() {
+        //Toggle opened class in order to animate the previewer close from the top (to the bottom)
         let previewer = this.el.shadowRoot.querySelector('.previewer-wrapper') as HTMLElement;
-        //previewer.style.display = 'none';
         previewer.classList.remove('previewer-wrapper__opened');
+        //Remove disable-scroll class to bring back the editor
+        let editor = this.el.shadowRoot.querySelector('.editor-wrapper') as HTMLElement;
+        editor.classList.remove('disable-scroll');
     }
 
     /**
-     * Count words
+     * Count content words
      */
     @Method()
     async countWords() {
-        let s = this.content.replace(/(^\s*)|(\s*$)/gi, "");
+        return this.countWordsFromText(this.content);
+    }
+
+    /**
+     * TODO: surely this can be improved
+     */
+    @Method()
+    async countWordsFromText( text: string ) {
+        if( !text ) {
+            return 0;
+        }
+        let s = text.replace(/(^\s*)|(\s*$)/gi, "");
         s = s.replace(/[ ]{2,}/gi, " ");
         s = s.replace(/\n /, "\n");
         return s.split(' ').length;
     }
 
+    /**
+     * Main (modern) copy HTML to clipboard (using browser navigator.clipboard API)
+     */
     copyHtmlToClipboard() {
         let text = this.el.shadowRoot.querySelector('.previewer-wrapper__area').innerHTML;
-        navigator.clipboard.writeText(text).then( 
-            () => {
-                
-            }, 
-            () => {
-            if ( (document as any).selection) {
-                let range = (document.body as any).createTextRange();
-                range.moveToElementText(this.el.shadowRoot.querySelector('.previewer-wrapper__area'));
-                range.select().createTextRange();
-                document.execCommand("copy");
-            
-              } else if (window.getSelection) {
-                let range = document.createRange();
-                range.selectNode(this.el.shadowRoot.querySelector('.previewer-wrapper__area'));
-                window.getSelection().addRange(range);
-                document.execCommand("copy");
-              }
-        });
+        if( navigator && navigator.clipboard ) {
+            navigator.clipboard.writeText(text).then( 
+                 () => {
+                    (async () => {
+                        const toast = await this.toastCtrl.create({
+                            message: 'HTML successfully copied to clipboard!',
+                            duration: 2000
+                        });
+                        toast.present();
+                    })();
+                }, 
+                () => {
+                    this.copyHtmlToClipboardFallback();
+
+            }).catch( () => {
+                this.copyHtmlToClipboardFallback();
+            } );
+        }
+        else {
+            this.copyHtmlToClipboardFallback();
+        }
+    }
+
+    /**
+     * Copy HTML to clipboard fallback (in order to work in mobile browsers...)
+     */
+    copyHtmlToClipboardFallback() {
+        if ( (document as any).selection) {
+            let range = (document.body as any).createTextRange();
+            range.moveToElementText(this.el.shadowRoot.querySelector('.previewer-wrapper__area'));
+            range.select().createTextRange();
+            document.execCommand("copy");
+            ( async () => {
+                const toast = await this.toastCtrl.create({
+                    message: 'HTML successfully copied to clipboard!',
+                    duration: 2000
+                });
+                toast.present();
+            })();
+        
+        } else if (window.getSelection) {
+            let range = document.createRange();
+            range.selectNode(this.el.shadowRoot.querySelector('.previewer-wrapper__area'));
+            window.getSelection().addRange(range);
+            document.execCommand("copy");
+            ( async () => {
+                const toast = await this.toastCtrl.create({
+                    message: 'HTML successfully copied to clipboard!',
+                    duration: 2000
+                });
+                toast.present();
+            })();
+        }
+        else {
+            ( async () => {
+                const toast = await this.toastCtrl.create({
+                    message: 'An error ocurred copying the HTML to the clipboard.',
+                    duration: 2000
+                });
+                toast.present();
+            })();
+        }
     }
 
     @Watch('customEditorElement')
@@ -214,7 +290,6 @@ export class DlcMarkdownEditor {
         //The editor element must be set looking for in the Shadow DOM. It could be a textarea or an input element,
         //and it could be nested in any children of the shadow root
         if (!this.editorEl) {
-            //this.editorEl = this.el.shadowRoot.querySelector('.editor');
             this.editorEl = this.el.shadowRoot.querySelector('textarea, input');
         }
     }
@@ -222,9 +297,10 @@ export class DlcMarkdownEditor {
     private convertTextToMarkdownListener() {
         //We must handle the user inputs in the editor and update the markdown
         if (this.editorEl) {
-            this.editorEl.oninput = _ => {
+            this.editorEl.oninput = async _ => {
                 this.content = this.editorEl.value;
                 this.updateMarkdownPreview();
+                this.contentChanged.emit( { content: this.content, numWords: await this.countWordsFromText(this.content) } );
             };
         }
     }
@@ -237,19 +313,6 @@ export class DlcMarkdownEditor {
     private getEditorElementHtml() {
         return this.customEditorElement ? this._getEditorElementCustom() : this._getEditorElementDefault();
     }
-
-    /*    private _getEditorElementCustom() {
-            if (this.editorEl) {
-                return this.editorEl.outerHTML;
-            }
-            let el = document.createElement(this.customEditorElement) as HTMLInputElement;
-            if (el) {
-                el.className = 'editor';
-                el.contentEditable = 'true';
-                return el.outerHTML;
-            }
-            return null;
-        }*/
 
     private _getEditorElementCustom() {
         //Custom editor element. Retrieve the element passed in by the user and assign the required properties
@@ -271,7 +334,6 @@ export class DlcMarkdownEditor {
     private _getEditorElementDefault() {
         //If user didn't pass in a custom element, we create by default a textarea for the editor
         if (this.outerHtml) {
-            //return this.editorEl.outerHTML;
             return this.outerHtml;
         }
         let el = document.createElement('textarea');
@@ -285,9 +347,10 @@ export class DlcMarkdownEditor {
         return null;
     }
 
-    private setEditorElContent() {
+    private async setEditorElContent() {
         if (this.editorEl && this.content && !this.editorEl.value) {
             this.editorEl.value = this.content;
+            this.contentChanged.emit({ content: this.content, numWords: await this.countWordsFromText(this.content) });
         }
     }
 

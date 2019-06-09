@@ -23,9 +23,13 @@ export namespace Components {
     */
     'content': string;
     /**
-    * Count words
+    * Count content words
     */
     'countWords': () => Promise<number>;
+    /**
+    * TODO: surely this can be improved
+    */
+    'countWordsFromText': (text: string) => Promise<number>;
     /**
     * We can pass in a custom element to handle the editor (<textarea>, <input> or an element that contains one of these)
     */
@@ -46,6 +50,9 @@ export namespace Components {
     * Create a link onto the selected text
     */
     'link': () => Promise<void>;
+    /**
+    * Previewer style. Default is 'github' style (currently only supporting github)
+    */
     'previewerStyle': 'github';
     'removePreviewerClasses': (...classes: string[]) => Promise<void>;
     'setPreviewerClasses': (...classes: string[]) => Promise<void>;
@@ -104,6 +111,13 @@ declare namespace LocalJSX {
     * Whether enable or not the keyboard shortcuts
     */
     'enableShortcuts'?: boolean;
+    /**
+    * Event that gets called once the content has changed (it's also called if we pass in the content from a prop)
+    */
+    'onContentChanged'?: (event: CustomEvent<any>) => void;
+    /**
+    * Previewer style. Default is 'github' style (currently only supporting github)
+    */
     'previewerStyle'?: 'github';
   }
   interface MyComponent extends JSXBase.HTMLAttributes<HTMLMyComponentElement> {

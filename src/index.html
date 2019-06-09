@@ -14,8 +14,24 @@
       height: 90vh;
     }
 
+    .word-counter {
+      text-align: center;
+      margin: .5rem;
+      border: 1px dashed gray;
+      border-radius: 5px;
+      font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+      padding: 5px;
+      font-weight: bold;
+      color: white;
+      background-color: #2188ff
+    }
+
+    #num-words {
+      font-weight: normal;
+    }
+
     dlc-markdown-editor::part(editor) {
-      font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+      /*font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;*/
       font-size: 1rem;
       border-radius: 3px;
       border: 1px solid #d1d5da;
@@ -42,10 +58,13 @@
 
   <!--<my-component first="Stencil" last="'Don't call me a framework' JS"></my-component>-->
   <div class="markdown-editor-wrapper">
+    <div class="word-counter">
+      Words: <span id="num-words"></span>
+    </div>
     <dlc-markdown-editor enableShortcuts="true" previewerStyle="github"></dlc-markdown-editor>
   </div>
 
-  <script>
+  <script async>
 
     let dlcMdEditor = document.querySelector('dlc-markdown-editor');
     //let input = document.createElement('input');
@@ -83,11 +102,9 @@ Currently only these shortcuts are supported:
 By [David López Castellote](https://dlopezcastellote.dev/)
 `;
 
-setTimeout( () => {
-  dlcMdEditor.countWords().then( (val) => {
-    console.log(`Words: ${val}`);
-  });
-}, 1000 );
+dlcMdEditor.addEventListener('contentChanged', (e) => {
+  document.getElementById('num-words').innerHTML = e.detail.numWords;
+});
 
   </script>
 
