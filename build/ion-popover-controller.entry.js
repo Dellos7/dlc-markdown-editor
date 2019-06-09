@@ -1,5 +1,5 @@
-import { e as registerInstance, j as getContext } from './dlc-markdown-editor-0cf5bcf8.js';
-import { f as createOverlay, g as dismissOverlay, h as getOverlay } from './chunk-d1a72b9a.js';
+import { r as registerInstance, f as getContext } from './dlc-markdown-editor-505a8a95.js';
+import { c as createOverlay, a as dismissOverlay, g as getOverlay } from './chunk-efd2c884.js';
 
 class PopoverController {
     constructor(hostRef) {

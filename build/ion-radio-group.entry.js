@@ -1,4 +1,4 @@
-import { e as registerInstance, i as createEvent, h as getIonMode, g as getElement, f as h, k as Host } from './dlc-markdown-editor-0cf5bcf8.js';
+import { r as registerInstance, e as createEvent, d as getIonMode, c as getElement, h, H as Host } from './dlc-markdown-editor-505a8a95.js';
 
 class RadioGroup {
     constructor(hostRef) {

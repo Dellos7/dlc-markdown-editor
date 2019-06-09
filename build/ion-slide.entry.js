@@ -1,4 +1,4 @@
-import { e as registerInstance, i as createEvent, h as getIonMode, f as h, k as Host } from './dlc-markdown-editor-0cf5bcf8.js';
+import { r as registerInstance, e as createEvent, d as getIonMode, h, H as Host } from './dlc-markdown-editor-505a8a95.js';
 
 class Slide {
     constructor(hostRef) {

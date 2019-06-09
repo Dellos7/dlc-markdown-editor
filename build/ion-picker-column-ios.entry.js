@@ -1,6 +1,6 @@
-import { e as registerInstance, i as createEvent, j as getContext, h as getIonMode, f as h, g as getElement, k as Host } from './dlc-markdown-editor-0cf5bcf8.js';
-import { f as clamp } from './chunk-f3597f81.js';
-import { a as hapticSelectionChanged } from './chunk-3a57d379.js';
+import { r as registerInstance, e as createEvent, f as getContext, d as getIonMode, h, c as getElement, H as Host } from './dlc-markdown-editor-505a8a95.js';
+import { c as clamp } from './chunk-3702a6ef.js';
+import { h as hapticSelectionChanged } from './chunk-cec2f2df.js';
 
 /**
  * @internal
@@ -38,7 +38,7 @@ class PickerColumnCmp {
             this.optHeight = (colEl.firstElementChild ? colEl.firstElementChild.clientHeight : 0);
         }
         this.refresh();
-        this.gesture = (await __sc_import_dlc_markdown_editor('./index-6d465cfc.js')).createGesture({
+        this.gesture = (await __sc_import_dlc_markdown_editor('./index-3a50bd4a.js')).createGesture({
             el: this.el,
             gestureName: 'picker-swipe',
             gesturePriority: 100,

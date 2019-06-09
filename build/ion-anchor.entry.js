@@ -1,5 +1,5 @@
-import { e as registerInstance, j as getContext, h as getIonMode, f as h, k as Host } from './dlc-markdown-editor-0cf5bcf8.js';
-import { b as openURL, c as createColorClasses } from './chunk-4d735167.js';
+import { r as registerInstance, f as getContext, d as getIonMode, h, H as Host } from './dlc-markdown-editor-505a8a95.js';
+import { o as openURL, c as createColorClasses } from './chunk-abd3a723.js';
 
 class Anchor {
     constructor(hostRef) {

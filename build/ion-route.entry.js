@@ -1,4 +1,4 @@
-import { e as registerInstance, i as createEvent } from './dlc-markdown-editor-0cf5bcf8.js';
+import { r as registerInstance, e as createEvent } from './dlc-markdown-editor-505a8a95.js';
 
 class Route {
     constructor(hostRef) {

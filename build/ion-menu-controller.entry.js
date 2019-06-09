@@ -1,4 +1,4 @@
-import { e as registerInstance, j as getContext, q as Build } from './dlc-markdown-editor-0cf5bcf8.js';
+import { r as registerInstance, f as getContext, B as Build } from './dlc-markdown-editor-505a8a95.js';
 
 /**
  * baseAnimation

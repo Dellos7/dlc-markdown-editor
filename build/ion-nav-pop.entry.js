@@ -1,4 +1,4 @@
-import { e as registerInstance, g as getElement } from './dlc-markdown-editor-0cf5bcf8.js';
+import { r as registerInstance, c as getElement } from './dlc-markdown-editor-505a8a95.js';
 
 class NavPop {
     constructor(hostRef) {

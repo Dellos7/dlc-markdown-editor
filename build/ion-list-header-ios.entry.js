@@ -1,5 +1,5 @@
-import { e as registerInstance, h as getIonMode, f as h, k as Host } from './dlc-markdown-editor-0cf5bcf8.js';
-import { c as createColorClasses } from './chunk-4d735167.js';
+import { r as registerInstance, d as getIonMode, h, H as Host } from './dlc-markdown-editor-505a8a95.js';
+import { c as createColorClasses } from './chunk-abd3a723.js';
 
 /**
  * @virtualProp {"ios" | "md"} mode - The mode determines which platform styles to use.

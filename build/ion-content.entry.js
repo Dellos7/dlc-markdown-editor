@@ -1,5 +1,5 @@
-import { e as registerInstance, i as createEvent, j as getContext, h as getIonMode, l as isPlatform, f as h, g as getElement, k as Host } from './dlc-markdown-editor-0cf5bcf8.js';
-import { c as createColorClasses, d as hostContext } from './chunk-4d735167.js';
+import { r as registerInstance, e as createEvent, f as getContext, d as getIonMode, i as isPlatform, h, c as getElement, H as Host } from './dlc-markdown-editor-505a8a95.js';
+import { c as createColorClasses, h as hostContext } from './chunk-abd3a723.js';
 
 /**
  * @slot - Content is placed in the scrollable area if provided without a slot.

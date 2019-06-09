@@ -1,4 +1,4 @@
-import { e as registerInstance, i as createEvent, m as writeTask, n as readTask, f as h, k as Host, g as getElement } from './dlc-markdown-editor-0cf5bcf8.js';
+import { r as registerInstance, e as createEvent, w as writeTask, l as readTask, h, H as Host, c as getElement } from './dlc-markdown-editor-505a8a95.js';
 
 class InfiniteScroll {
     constructor(hostRef) {

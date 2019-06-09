@@ -1,5 +1,5 @@
-import { e as registerInstance, q as Build, f as h, g as getElement, k as Host } from './dlc-markdown-editor-0cf5bcf8.js';
-import { a as attachComponent } from './chunk-b3ecd786.js';
+import { r as registerInstance, B as Build, h, c as getElement, H as Host } from './dlc-markdown-editor-505a8a95.js';
+import { a as attachComponent } from './chunk-a88b8db5.js';
 
 class Tab {
     constructor(hostRef) {

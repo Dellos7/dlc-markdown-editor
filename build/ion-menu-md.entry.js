@@ -1,6 +1,6 @@
-import { e as registerInstance, h as getIonMode, i as createEvent, o as getConnect, p as config, q as Build, f as h, k as Host, g as getElement } from './dlc-markdown-editor-0cf5bcf8.js';
-import { h as isEndSide, i as assert } from './chunk-f3597f81.js';
-import { GESTURE_CONTROLLER } from './index-6d465cfc.js';
+import { r as registerInstance, d as getIonMode, e as createEvent, m as getConnect, n as config, B as Build, h, H as Host, c as getElement } from './dlc-markdown-editor-505a8a95.js';
+import { i as isEndSide, b as assert } from './chunk-3702a6ef.js';
+import { GESTURE_CONTROLLER } from './index-3a50bd4a.js';
 
 class Menu {
     constructor(hostRef) {
@@ -90,7 +90,7 @@ class Menu {
         this.sideChanged();
         // register this menu with the app's menu controller
         menuCtrl._register(this);
-        this.gesture = (await __sc_import_dlc_markdown_editor('./index-6d465cfc.js')).createGesture({
+        this.gesture = (await __sc_import_dlc_markdown_editor('./index-3a50bd4a.js')).createGesture({
             el: document,
             gestureName: 'menu-swipe',
             gesturePriority: 30,

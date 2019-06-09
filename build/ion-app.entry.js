@@ -1,5 +1,5 @@
-import { e as registerInstance, j as getContext, h as getIonMode, g as getElement, f as h, k as Host, l as isPlatform } from './dlc-markdown-editor-0cf5bcf8.js';
-import { a as rIC } from './chunk-f3597f81.js';
+import { r as registerInstance, f as getContext, d as getIonMode, c as getElement, h, H as Host, i as isPlatform } from './dlc-markdown-editor-505a8a95.js';
+import { r as rIC } from './chunk-3702a6ef.js';
 
 class App {
     constructor(hostRef) {
@@ -42,19 +42,19 @@ function importHardwareBackButton(win, config) {
 function importStatusTap(win, config) {
     const statusTap = config.getBoolean('statusTap', isPlatform(win, 'hybrid'));
     if (statusTap) {
-        __sc_import_dlc_markdown_editor('./status-tap-27fac6d2.js').then(module => module.startStatusTap(win));
+        __sc_import_dlc_markdown_editor('./status-tap-54dc36ea.js').then(module => module.startStatusTap(win));
     }
 }
 function importFocusVisible(win) {
     __sc_import_dlc_markdown_editor('./focus-visible-847abe33.js').then(module => module.startFocusVisible(win.document));
 }
 function importTapClick(win, config) {
-    __sc_import_dlc_markdown_editor('./tap-click-71412226.js').then(module => module.startTapClick(win.document, config));
+    __sc_import_dlc_markdown_editor('./tap-click-a24468ce.js').then(module => module.startTapClick(win.document, config));
 }
 function importInputShims(win, config) {
     const inputShims = config.getBoolean('inputShims', needInputShims(win));
     if (inputShims) {
-        __sc_import_dlc_markdown_editor('./input-shims-b4f3cb1a.js').then(module => module.startInputShims(win.document, config));
+        __sc_import_dlc_markdown_editor('./input-shims-8856484e.js').then(module => module.startInputShims(win.document, config));
     }
 }
 function needInputShims(win) {
